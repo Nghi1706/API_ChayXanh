@@ -19,6 +19,24 @@ export const getUser = async (req, res) => {
         res.status(500).json({ error: err });
     }
 }
+export const getManager = async (req, res) => {
+    try {
+        const params = req.body;
+        const manager = await Users_CX.find({ "restaurant_id": params.restaurant_id, "role": 1 });
+        res.status(200).json(manager);
+    } catch (err) {
+        res.status(500).json({ error: err });
+    }
+}
+export const getEmployee = async (req, res) => {
+    try {
+        const params = req.body;
+        const employee = await Users_CX.find({ "restaurant_id": params.restaurant_id, "role": 0 });
+        res.status(200).json(employee);
+    } catch (err) {
+        res.status(500).json({ error: err });
+    }
+}
 //find user by _id
 export const findUser = async (req, res) => {
     try {

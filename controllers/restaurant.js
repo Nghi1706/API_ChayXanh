@@ -9,10 +9,32 @@ import { Restaurants_CX } from "../models/createTable.js";
 //     }
 // }
 
-export const getRestaurant = async (req, res) => {
+export const findRestaurant = async (req, res) => {
+    try {
+        const restaurant = req.body;
+        const infoRestaurant = await Restaurants_CX.findById(restaurant._id);
+        res.status(200).json(infoRestaurant);
+    } catch (err) {
+        res.status(500).json({ error: err });
+    }
+}
+
+export const getListRestaurant = async (req, res) => {
     try {
         const listRestaurant = await Restaurants_CX.find();
-        res.status(200).json(listRestaurant);
+        var restaurants = [];
+        for (let i = 0; i < listRestaurant.length; i++) {
+            restaurants.push({
+                "restaurant_id": listRestaurant[i]._id,
+                "name": listRestaurant[i].name,
+            })
+        }
+        if (restaurants.length == 0) {
+            res.status(403).json();
+        }
+        else {
+            res.status(200).json(restaurants);
+        }
     } catch (err) {
         res.status(500).json({ error: err });
     }
