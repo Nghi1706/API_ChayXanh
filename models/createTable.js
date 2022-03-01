@@ -52,13 +52,13 @@ const Products = new mongoose.Schema({
         type: Number,
         required: true
     },
-});
-const Materials = new mongoose.Schema({
     restaurant_id: {
         type: String,
         required: true
-    },
-    product_id: {
+    }
+});
+const Materials = new mongoose.Schema({
+    restaurant_id: {
         type: String,
         required: true
     },
@@ -96,7 +96,7 @@ const Restaurants = new mongoose.Schema({
     }
 });
 const Purchase_history = new mongoose.Schema({
-    restaurant_name: {
+    restaurant_id: {
         type: String,
         required: true
     },
